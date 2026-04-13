@@ -41,6 +41,7 @@ Thumbs.db
 ### Claude Code & Gemini ###
 .claude/CLAUDE.local.md
 .gemini/
+*.local.md
 
 ### Logs ###
 *.log
