@@ -35,8 +35,10 @@ subprojects {
         testCompileOnly 'org.projectlombok:lombok'
         testAnnotationProcessor 'org.projectlombok:lombok'
 
-        // Validation (모든 모듈 공통)
-        implementation 'org.springframework.boot:spring-boot-starter-validation'
+        // Validation (api-gateway 제외 - WebFlux 기반이라 Servlet 스택과 충돌)
+        if (project.name != 'api-gateway') {
+            implementation 'org.springframework.boot:spring-boot-starter-validation'
+        }
 
         // Testing
         testImplementation 'org.springframework.boot:spring-boot-starter-test'

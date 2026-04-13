@@ -1,36 +1,40 @@
 server:
-  port: 8081
+  port: 8082
 
 spring:
   application:
-    name: user-service
-  
+    name: performance-service
+
   profiles:
     active: local
-  
-  # PostgreSQL
+
   datasource:
     url: ${DB_URL:jdbc:postgresql://localhost:5432/showlog_db}
     username: ${DB_USERNAME:showlog}
     password: ${DB_PASSWORD:showlog123}
     driver-class-name: org.postgresql.Driver
-  
-  # JPA
+
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: validate
     show-sql: true
     properties:
       hibernate:
         format_sql: true
-        default_schema: user_schema
-  
-  # Redis
+        default_schema: performance_schema
+
   data:
     redis:
       host: ${REDIS_HOST:localhost}
       port: ${REDIS_PORT:6379}
 
-# Flyway 비활성화 (초기 엔티티 생성 확인용, 나중에 ddl-auto=none 변경 시 활성화)
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
 flyway:
-  enabled: false
+  enabled: true
+  locations: classpath:db/migration
+  default-schema: performance_schema
