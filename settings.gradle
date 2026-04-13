@@ -1,6 +1,8 @@
 rootProject.name = 'GigLog'
 
-include 'performance-service'
-include 'archive-service'
-include 'notification-service'
 include 'common'
+include 'api-gateway'
+include 'user-service'
+include 'performance-service'
+include 'record-service'
+include 'notification-service'

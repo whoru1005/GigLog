@@ -1,7 +1,7 @@
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '3.4.0' apply false
-    id 'io.spring.dependency-management' version '1.1.7' apply false
+    id 'org.springframework.boot' version '3.2.11' apply false
+    id 'io.spring.dependency-management' version '1.1.6' apply false
 }
 
 allprojects {
@@ -24,6 +24,21 @@ subprojects {
     }
 
     dependencies {
+        // common 모듈을 제외한 모든 모듈은 common을 의존
+        if (project.name != 'common') {
+            implementation project(':common')
+        }
+        
+        // Lombok (모든 모듈 공통)
+        compileOnly 'org.projectlombok:lombok'
+        annotationProcessor 'org.projectlombok:lombok'
+        testCompileOnly 'org.projectlombok:lombok'
+        testAnnotationProcessor 'org.projectlombok:lombok'
+
+        // Validation (모든 모듈 공통)
+        implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+        // Testing
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
         testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
     }

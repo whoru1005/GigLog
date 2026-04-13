@@ -1,0 +1,36 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: user-service
+  
+  profiles:
+    active: local
+  
+  # PostgreSQL
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/showlog_db}
+    username: ${DB_USERNAME:showlog}
+    password: ${DB_PASSWORD:showlog123}
+    driver-class-name: org.postgresql.Driver
+  
+  # JPA
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        default_schema: public
+  
+  # Redis
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+
+# Flyway 비활성화 (초기 엔티티 생성 확인용, 나중에 ddl-auto=none 변경 시 활성화)
+flyway:
+  enabled: false

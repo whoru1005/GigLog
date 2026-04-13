@@ -36,24 +36,19 @@ GET    /actuator/health
 
 ## 소셜 로그인
 
-<!-- ============================================================
-  ✏️ 직접 작성 필요: OAuth2 Provider 설정
-  사용할 소셜 로그인 제공자를 확정한 뒤 아래를 업데이트하세요.
-  
-  예시 (카카오 로그인을 사용하는 경우):
-  - Provider: Kakao
-  - Client ID: 카카오 개발자 콘솔에서 발급
-  - Redirect URI: https://yourdomain.com/api/v1/auth/kakao/callback
-  - 받아올 정보: 닉네임, 이메일, 프로필 이미지
-  
-  예시 (Google 로그인을 사용하는 경우):
-  - Provider: Google
-  - Client ID: Google Cloud Console에서 발급
-  - Redirect URI: https://yourdomain.com/api/v1/auth/google/callback
-============================================================ -->
-
 소셜 로그인 후 `app_user` 테이블에 유저 생성/조회하여 JWT 발급.
 신규 유저는 `provider` + `provider_id`로 식별.
+
+### 확정된 제공자 (Provider)
+- **Kakao**
+  - Client ID: 카카오 개발자 콘솔에서 발급
+  - Redirect URI: `https://yourdomain.com/api/v1/auth/kakao/callback` (운영), `http://localhost:8080/api/v1/auth/kakao/callback` (개발)
+  - Scope: profile_nickname, account_email
+- **Google**
+  - Client ID: Google Cloud Console에서 발급
+  - Redirect URI: `https://yourdomain.com/api/v1/auth/google/callback` (운영), `http://localhost:8080/api/v1/auth/google/callback` (개발)
+  - Scope: profile, email
+
 
 ## 입력값 검증
 
