@@ -34,13 +34,14 @@ com.stagediary.{서비스명}/
 모든 컨트롤러는 `ApiResponse<T>`를 반환한다:
 
 ```java
-public record ApiResponse<T>(
-    boolean success,
-    T data,
-    String message
-) {
-    public static <T> ApiResponse<T> ok(T data) { ... }
-    public static <T> ApiResponse<T> error(String message) { ... }
+public class ApiResponse<T> {
+    private final boolean success;
+    private final String message;
+    private final T data;
+    private final String errorCode;
+
+    public static <T> ApiResponse<T> success(T data) { ... }
+    public static <T> ApiResponse<T> fail(String errorCode, String message) { ... }
 }
 ```
 
