@@ -1,4 +1,4 @@
-# StageDiary — 공연 팬 통합 플랫폼
+# GigLog — 공연 팬 통합 플랫폼
 
 공연(뮤지컬·콘서트·연극) 관람 기록 아카이빙 + 개인 통계 + 티켓팅 알림 서비스.
 Spring Boot MSA (3개 서비스), PostgreSQL, Kafka, Redis, AWS 기반.
@@ -46,6 +46,14 @@ docker-compose -f docker/docker-compose-local.yml up -d
 - QueryDSL 5.x (동적 검색)
 - Flyway (DB 마이그레이션)
 - AWS: EC2, ALB, RDS, S3, ElastiCache, CloudWatch
+
+## 프로젝트 관리
+
+- Jira 스크럼 보드 (프로젝트 키: `GL`, 1스프린트 = 1주, 총 8스프린트)
+- Atlassian Rovo MCP 연결됨 — 이슈 생성/조회/업데이트에 활용
+- 이슈 계층: Epic → Story → Task
+- Jira-Git 연동: 브랜치명·커밋·PR에 이슈 키(`GL-XX`) 포함
+- 스프린트 관리 상세 규칙은 `.claude/rules/jira.md` 참고
 
 ## 핵심 규칙
 
