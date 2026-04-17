@@ -1,0 +1,40 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: performance-service
+
+  profiles:
+    active: local
+
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/showlog_db}
+    username: ${DB_USERNAME:showlog}
+    password: ${DB_PASSWORD:showlog123}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        default_schema: performance_schema
+
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
+flyway:
+  enabled: true
+  locations: classpath:db/migration
+  default-schema: performance_schema

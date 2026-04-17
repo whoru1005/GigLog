@@ -1,11 +1,11 @@
-package com.giglog.archive;
+package com.giglog.user;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ArchiveApplication {
+public class UserApplication {
     public static void main(String[] args) {
-        SpringApplication.run(ArchiveApplication.class, args);
+        SpringApplication.run(UserApplication.class, args);
     }
 }

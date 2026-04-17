@@ -34,6 +34,10 @@ out/
 .env.*
 !.env.example
 
+### Markdown Files ###
+*.md
+!.github/PULL_REQUEST_TEMPLATE.md
+
 ### OS ###
 .DS_Store
 Thumbs.db
@@ -41,6 +45,7 @@ Thumbs.db
 ### Claude Code & Gemini ###
 .claude/CLAUDE.local.md
 .gemini/
+*.local.md
 
 ### Logs ###
 *.log

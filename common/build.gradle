@@ -1,15 +1,20 @@
 plugins {
-    id 'org.springframework.boot'
+    // java-library: 소비자에게 노출할 의존성(api)과 내부 의존성(implementation)을 명확히 구분
+    id 'java-library'
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter'
-}
+    // api: 소비자 모듈의 컴파일 클래스패스에 노출되어야 하는 의존성
+    api 'org.springframework.boot:spring-boot-starter'
 
-bootJar {
-    enabled = false
-}
+    // compileOnly: GlobalExceptionHandler(ResponseEntity), BaseTimeEntity(JPA),
+    //              ApiResponse(@JsonInclude) 컴파일에 필요하지만 소비자에게 누출하지 않음.
+    // 각 서비스는 자신의 build.gradle 에서 이 의존성을 직접 선언하므로 런타임에 정상 동작한다.
+    compileOnly 'org.springframework.boot:spring-boot-starter-web'
+    compileOnly 'org.springframework.boot:spring-boot-starter-data-jpa'
 
-jar {
-    enabled = true
+    // JWT — 소비자가 common 의 JwtUtil 반환 타입(Claims 등)을 직접 사용하므로 api 스코프
+    api 'io.jsonwebtoken:jjwt-api:0.12.5'
+    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.12.5'
+    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.12.5'
 }
