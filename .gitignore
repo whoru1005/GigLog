@@ -42,6 +42,10 @@ out/
 .DS_Store
 Thumbs.db
 
+### Firebase ###
+**/firebase/service-account.json
+**/firebase/*.json
+
 ### Claude Code & Gemini ###
 .claude/CLAUDE.local.md
 .claude/settings.local.json
