@@ -3,9 +3,12 @@ package com.giglog.common.exception;
 import com.giglog.common.dto.response.ApiResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import java.util.Objects;
 
 @Slf4j
 @RestControllerAdvice
@@ -23,10 +26,14 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     protected ResponseEntity<ApiResponse<Void>> handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
         log.error("handleMethodArgumentNotValidException: {}", e.getMessage());
+        String message = e.getBindingResult().getAllErrors().stream()
+                .map(ObjectError::getDefaultMessage)
+                .filter(Objects::nonNull)
+                .findFirst()
+                .orElse(ErrorCode.INVALID_INPUT_VALUE.getMessage());
         return ResponseEntity
                 .status(400)
-                .body(ApiResponse.fail(ErrorCode.INVALID_INPUT_VALUE.getCode(), 
-                        e.getBindingResult().getAllErrors().get(0).getDefaultMessage()));
+                .body(ApiResponse.fail(ErrorCode.INVALID_INPUT_VALUE.getCode(), message));
     }
 
     @ExceptionHandler(Exception.class)
